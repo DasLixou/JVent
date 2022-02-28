@@ -2,7 +2,12 @@ package cc.lixou.jvent;
 
 import java.util.function.Consumer;
 
-@FunctionalInterface
-public interface Listener<T extends Event> extends Consumer<T> {
+public class Listener<T extends Event> {
+
+    private final Consumer<T> consumer;
+
+    public Listener(Consumer<T> consumer) {
+        this.consumer = consumer;
+    }
 
 }
