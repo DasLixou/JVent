@@ -17,7 +17,7 @@ public class EventTest {
             value.set(exampleEvent.getMyString());
         }, true);
 
-        Event.getHandler(ExampleEvent.class).call(new ExampleEvent(wanted));
+        ExampleEvent result = Event.getHandler(ExampleEvent.class).call(new ExampleEvent(wanted));
 
         assertEquals(value.get(), wanted);
     }
