@@ -1,11 +1,21 @@
+import cc.lixou.jvent.Cancellable;
 import cc.lixou.jvent.Event;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
-@AllArgsConstructor
 @Getter
-public class ExampleEvent extends Event {
+public class ExampleEvent extends Event implements Cancellable {
 
-    private String myString;
+    public ExampleEvent(String myString) {
+        this.myString = myString;
+    }
 
+    private final String myString;
+    @Setter
+    private boolean cancelled;
+
+    @Override
+    public boolean isCancelled() {
+        return cancelled;
+    }
 }

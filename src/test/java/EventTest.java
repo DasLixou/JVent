@@ -15,11 +15,13 @@ public class EventTest {
 
         new Listener(ExampleEvent.class, exampleEvent -> {
             value.set(exampleEvent.getMyString());
+            exampleEvent.setCancelled(true);
         }, true);
 
         ExampleEvent result = Event.getHandler(ExampleEvent.class).call(new ExampleEvent(wanted));
 
         assertEquals(value.get(), wanted);
+        assertEquals(result.isCancelled(), true);
     }
 
 }
