@@ -30,10 +30,11 @@ public class Listener {
     }
 
     @SuppressWarnings("unchecked")
-    public <U extends Event> void call(Event event) {
+    public <U extends Event> U call(U event) {
         if(event != null) {
             this.consumer.accept(event);
         }
+        return event;
     }
 
     public void subscribe() {

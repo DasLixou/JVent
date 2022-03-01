@@ -1,6 +1,7 @@
 package cc.lixou.jvent;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Handler {
 
@@ -10,8 +11,10 @@ public class Handler {
         listeners = new ArrayList<>();
     }
 
-    public void call(Event event) {
-        listeners.forEach(listener -> listener.call(event));
+    public <U extends Event> U call(U event) {
+        AtomicReference<U> result = new AtomicReference<>(event);
+        listeners.forEach(listener -> result.set(listener.call(result.get())));
+        return result.get();
     }
 
     public void subscribe(Listener listener) {
