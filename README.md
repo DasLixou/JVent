@@ -4,7 +4,7 @@ Event System for Java - inspired by Spigot
 ## Example
 The Event Class:
 ```java
-public class TestEvent extends Event {
+public class TestEvent extends JVent {
 
     private String value;
 
@@ -25,7 +25,7 @@ public static void main(String[] args) {
     }, true); // true for autosubscription
     
     // Calling an Event with Result
-    TestEvent result = Event.getHandler(TestEvent.class).call(new TestEvent("Initial Value"));
+    TestEvent result = JVent.getHandler(TestEvent.class).call(new TestEvent("Initial Value"));
     
     // Working with the Result
     System.out.println(result.getValue()); // Prints: It works! :)
