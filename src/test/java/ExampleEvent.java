@@ -1,10 +1,10 @@
 import cc.lixou.jvent.Cancellable;
-import cc.lixou.jvent.Event;
+import cc.lixou.jvent.JVent;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-public class ExampleEvent extends Event implements Cancellable {
+public class ExampleEvent extends JVent implements Cancellable {
 
     public ExampleEvent(String myString) {
         this.myString = myString;

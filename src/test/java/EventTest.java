@@ -1,4 +1,4 @@
-import cc.lixou.jvent.Event;
+import cc.lixou.jvent.JVent;
 import cc.lixou.jvent.Listener;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ public class EventTest {
             exampleEvent.setCancelled(true);
         }, true);
 
-        ExampleEvent result = Event.getHandler(ExampleEvent.class).call(new ExampleEvent(wanted));
+        ExampleEvent result = JVent.getHandler(ExampleEvent.class).call(new ExampleEvent(wanted));
 
         assertEquals(value.get(), wanted);
         assertEquals(result.isCancelled(), true);
