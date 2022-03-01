@@ -2,16 +2,24 @@ import cc.lixou.jvent.Event;
 import cc.lixou.jvent.Listener;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.concurrent.atomic.AtomicReference;
+
 public class EventTest {
 
     @Test
     public void test() {
-        Listener<ExampleEvent> listener = new Listener<>(ExampleEvent.class, exampleEvent -> {
-            String myString = exampleEvent.getMyString();
-            System.out.println(myString);
-        });
-        listener.subscribe();
-        Event.getHandler(ExampleEvent.class).call(new ExampleEvent("YAY!"));
+        AtomicReference<String> value = new AtomicReference<>("");
+        String wanted = "Yes it works! :D";
+
+        new Listener(ExampleEvent.class, exampleEvent -> {
+            value.set(exampleEvent.getMyString());
+        }, true);
+
+        Event.getHandler(ExampleEvent.class).call(new ExampleEvent(wanted));
+
+        assertEquals(value.get(), wanted);
     }
 
 }

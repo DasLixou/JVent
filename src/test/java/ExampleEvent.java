@@ -3,9 +3,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public class ExampleEvent extends Event {
 
-    @Getter
     private String myString;
 
 }

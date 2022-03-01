@@ -2,20 +2,37 @@ package cc.lixou.jvent;
 
 import java.util.function.Consumer;
 
-public class Listener<T extends Event> {
+public class Listener {
 
-    private final Consumer<T> consumer;
-    private final Class<T> eventClass;
+    @SuppressWarnings("All")
+    private final Consumer consumer;
+    private final Class<? extends Event> eventClass;
 
-    public Listener(Class<T> eventClass, Consumer<T> consumer) {
+    /**
+     * @param eventClass The Class of the Event you want to listen
+     * @param consumer Consumer for the code that executes when event gets fired
+     */
+    public <U extends Event> Listener(Class<U> eventClass, Consumer<U> consumer) {
         this.consumer = consumer;
         this.eventClass = eventClass;
     }
 
+    /**
+     * @param eventClass The Class of the Event you want to listen
+     * @param consumer Consumer for the code that executes when event gets fired
+     * @param autoSubscribe When true, the event will automaticly get subscribed
+     */
+    public <U extends Event> Listener(Class<U> eventClass, Consumer<U> consumer, boolean autoSubscribe) {
+        this(eventClass, consumer);
+        if(autoSubscribe) {
+            subscribe();
+        }
+    }
+
     @SuppressWarnings("unchecked")
-    public void call(Event event) {
+    public <U extends Event> void call(Event event) {
         if(event != null) {
-            this.consumer.accept((T)event);
+            this.consumer.accept(event);
         }
     }
 
