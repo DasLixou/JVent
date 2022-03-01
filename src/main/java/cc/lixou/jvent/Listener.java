@@ -6,13 +6,13 @@ public class Listener {
 
     @SuppressWarnings("All")
     private final Consumer consumer;
-    private final Class<? extends Event> eventClass;
+    private final Class<? extends JVent> eventClass;
 
     /**
      * @param eventClass The Class of the Event you want to listen
      * @param consumer Consumer for the code that executes when event gets fired
      */
-    public <U extends Event> Listener(Class<U> eventClass, Consumer<U> consumer) {
+    public <U extends JVent> Listener(Class<U> eventClass, Consumer<U> consumer) {
         this.consumer = consumer;
         this.eventClass = eventClass;
     }
@@ -22,7 +22,7 @@ public class Listener {
      * @param consumer Consumer for the code that executes when event gets fired
      * @param autoSubscribe When true, the event will automaticly get subscribed
      */
-    public <U extends Event> Listener(Class<U> eventClass, Consumer<U> consumer, boolean autoSubscribe) {
+    public <U extends JVent> Listener(Class<U> eventClass, Consumer<U> consumer, boolean autoSubscribe) {
         this(eventClass, consumer);
         if(autoSubscribe) {
             subscribe();
@@ -30,7 +30,7 @@ public class Listener {
     }
 
     @SuppressWarnings("unchecked")
-    public <U extends Event> U call(U event) {
+    public <U extends JVent> U call(U event) {
         if(event != null) {
             this.consumer.accept(event);
         }
@@ -38,11 +38,11 @@ public class Listener {
     }
 
     public void subscribe() {
-        Event.getHandler(eventClass).subscribe(this);
+        JVent.getHandler(eventClass).subscribe(this);
     }
 
     public void unsubscribe() {
-        Event.getHandler(eventClass).unsubscribe(this);
+        JVent.getHandler(eventClass).unsubscribe(this);
     }
 
 }
