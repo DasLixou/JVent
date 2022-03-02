@@ -33,6 +33,12 @@ public static void main(String[] args) {
 ```
 
 ## Installation
+
+**IMPORTANT:** Replace *VERSION* with the version you prefer.
+
+Newest Version: 
+[![](https://jitpack.io/v/LixouCanCode/JVent.svg)](https://jitpack.io/#LixouCanCode/JVent)
+
 Gradle:
 ```groovy
 repositories {
@@ -40,7 +46,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.LixouCanCode:JVent:1.2.2'
+    implementation 'com.github.LixouCanCode:JVent:VERSION'
 }
 ```
 
@@ -57,7 +63,7 @@ Maven:
     <dependency>
         <groupId>com.github.LixouCanCode</groupId>
         <artifactId>JVent</artifactId>
-        <version>1.2.2</version>
+        <version>VERSION</version>
     </dependency>
 </dependencies>
 ```
