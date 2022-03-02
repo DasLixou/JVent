@@ -40,7 +40,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.LixouCanCode:JVent:1.2.1'
+    implementation 'com.github.LixouCanCode:JVent:1.2.2'
 }
 ```
 
@@ -57,7 +57,7 @@ Maven:
     <dependency>
         <groupId>com.github.LixouCanCode</groupId>
         <artifactId>JVent</artifactId>
-        <version>1.2.1</version>
+        <version>1.2.2</version>
     </dependency>
 </dependencies>
 ```
