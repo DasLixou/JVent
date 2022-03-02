@@ -4,6 +4,7 @@ import cc.lixou.jvent.Listener;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -27,7 +28,7 @@ public class EventTest {
         ExampleEvent result = JVent.getHandler(ExampleEvent.class).call(new ExampleEvent(wanted));
 
         assertEquals(value.get(), wanted);
-        assertEquals(result.isCancelled(), true);
+        assertTrue(result.isCancelled());
     }
 
 }
