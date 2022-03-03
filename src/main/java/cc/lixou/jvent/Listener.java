@@ -7,6 +7,7 @@ public class Listener {
     @SuppressWarnings("All")
     private final Consumer consumer;
     private final Class<? extends JVent> eventClass;
+    private int priority = -1;
 
     /**
      * @param eventClass The Class of the Event you want to listen
@@ -78,23 +79,15 @@ public class Listener {
      */
     public void subscribe(int priority) {
         JVent.getHandler(eventClass).subscribe(this, priority);
+        this.priority = priority;
     }
 
     /**
-     * Unsubcribes the Listener with DefaultPriority: NORMAL (= 3)
+     * Unsubcribes the Listener
      */
-    public void unsubscribe() { unsubscribe(EventPriority.NORMAL); }
-    /**
-     * Unsubscribes the Listener with Custom Enum Priority
-     * @param e NOTE: In enums has the first value more priority than the last value
-     */
-    public void unsubscribe(Enum<?> e) { unsubscribe(e.ordinal()); }
-    /**
-     * Unsubscribes the Listener with Custom Integer Priority
-     * @param priority NOTE: 0 is the first called, then greater number get called next.
-     */
-    public void unsubscribe(int priority) {
-        JVent.getHandler(eventClass).unsubscribe(this, priority);
+    public void unsubscribe() {
+        if(this.priority == -1) { return; }
+        JVent.getHandler(eventClass).unsubscribe(this, this.priority);
     }
 
 }
