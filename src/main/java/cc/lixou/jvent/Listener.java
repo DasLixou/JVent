@@ -35,7 +35,7 @@ public class Listener {
      * @param autoSubscribe When true, the event will automaticly get subscribed
      * @param priority EventPriority for saying in which order the listeners should get called
      */
-    public <U extends JVent> Listener(Class<U> eventClass, Consumer<U> consumer, boolean autoSubscribe, EventPriority priority) {
+    public <U extends JVent> Listener(Class<U> eventClass, Consumer<U> consumer, boolean autoSubscribe, int priority) {
         this(eventClass, consumer);
         if(autoSubscribe) {
             subscribe(priority);
@@ -50,13 +50,13 @@ public class Listener {
         return event;
     }
 
-    public void subscribe() { subscribe(EventPriority.NORMAL); }
-    public void subscribe(EventPriority priority) {
+    public void subscribe() { subscribe(EventPriority.NORMAL.ordinal()); }
+    public void subscribe(int priority) {
         JVent.getHandler(eventClass).subscribe(this, priority);
     }
 
-    public void unsubscribe() { unsubscribe(EventPriority.NORMAL); }
-    public void unsubscribe(EventPriority priority) {
+    public void unsubscribe() { unsubscribe(EventPriority.NORMAL.ordinal()); }
+    public void unsubscribe(int priority) {
         JVent.getHandler(eventClass).unsubscribe(this, priority);
     }
 

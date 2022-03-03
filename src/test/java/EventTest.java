@@ -23,7 +23,7 @@ public class EventTest {
         new Listener(ExampleEvent.class, exampleEvent -> {
             value.set(exampleEvent.getMyString());
             exampleEvent.setCancelled(true);
-        }, true, EventPriority.LAST);
+        }, true, EventPriority.LAST.ordinal());
 
         ExampleEvent result = JVent.getHandler(ExampleEvent.class).call(new ExampleEvent(wanted));
 

@@ -20,23 +20,23 @@ public class Handler {
         return result.get();
     }
 
-    public void subscribe(Listener listener, EventPriority priority) {
+    public void subscribe(Listener listener, int priority) {
         ArrayList<Listener> listenerz = getListeners(priority);
         if(listenerz.contains(listener)) { return; }
         listenerz.add(listener);
     }
 
-    public void unsubscribe(Listener listener, EventPriority priority) {
+    public void unsubscribe(Listener listener, int priority) {
         ArrayList<Listener> listenerz = getListeners(priority);
         if(!listenerz.contains(listener)) { return; }
         listenerz.remove(listener);
     }
 
-    private ArrayList<Listener> getListeners(EventPriority priority) {
-        if(!listeners.containsKey(priority.ordinal())) {
-            listeners.put(priority.ordinal(), new ArrayList<>());
+    private ArrayList<Listener> getListeners(int priority) {
+        if(!listeners.containsKey(priority)) {
+            listeners.put(priority, new ArrayList<>());
         }
-        return listeners.get(priority.ordinal());
+        return listeners.get(priority);
     }
 
 }
