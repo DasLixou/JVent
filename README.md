@@ -22,7 +22,7 @@ public static void main(String[] args) {
     // Listening to TestEvent
     new Listener(TestEvent.class, event -> {
         event.setValue("It works! :)");
-    }, true); // true for autosubscription
+    }, true); // true for autosubscribtion
     
     // Calling an Event with Result
     TestEvent result = JVent.getHandler(TestEvent.class).call(new TestEvent("Initial Value"));
