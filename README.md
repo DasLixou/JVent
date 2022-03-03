@@ -1,5 +1,5 @@
 # JVent
-Event System for Java - inspired by Spigot 
+A simple Java Library built for making it easy and fast to create Event and Subscribtion Systems. 
 
 ## Example
 The Event Class:
