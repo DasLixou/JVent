@@ -33,9 +33,22 @@ public class Listener {
      * @param eventClass The Class of the Event you want to listen
      * @param consumer Consumer for the code that executes when event gets fired
      * @param autoSubscribe When true, the event will automaticly get subscribed
-     * @param priority EventPriority for saying in which order the listeners should get called
+     * @param priority Integer for saying in which order the listeners should get called (0 gets called first)
      */
     public <U extends JVent> Listener(Class<U> eventClass, Consumer<U> consumer, boolean autoSubscribe, int priority) {
+        this(eventClass, consumer);
+        if(autoSubscribe) {
+            subscribe(priority);
+        }
+    }
+
+    /**
+     * @param eventClass The Class of the Event you want to listen
+     * @param consumer Consumer for the code that executes when event gets fired
+     * @param autoSubscribe When true, the event will automaticly get subscribed
+     * @param priority Enum for saying in which order the listeners should get called (first enum element gets called first)
+     */
+    public <U extends JVent> Listener(Class<U> eventClass, Consumer<U> consumer, boolean autoSubscribe, Enum<?> priority) {
         this(eventClass, consumer);
         if(autoSubscribe) {
             subscribe(priority);
@@ -50,12 +63,36 @@ public class Listener {
         return event;
     }
 
-    public void subscribe() { subscribe(EventPriority.NORMAL.ordinal()); }
+    /**
+     * Subscribes the Listener with DefaultPriority: NORMAL (= 3)
+     */
+    public void subscribe() { subscribe(EventPriority.NORMAL); }
+    /**
+     * Subscribes the Listener with Custom Enum Priority
+     * @param e NOTE: In enums has the first value more priority than the last value
+     */
+    public void subscribe(Enum<?> e) { subscribe(e.ordinal()); }
+    /**
+     * Subscribes the Listener with Custom Integer Priority
+     * @param priority NOTE: 0 is the first called, then greater number get called next.
+     */
     public void subscribe(int priority) {
         JVent.getHandler(eventClass).subscribe(this, priority);
     }
 
-    public void unsubscribe() { unsubscribe(EventPriority.NORMAL.ordinal()); }
+    /**
+     * Unsubcribes the Listener with DefaultPriority: NORMAL (= 3)
+     */
+    public void unsubscribe() { unsubscribe(EventPriority.NORMAL); }
+    /**
+     * Unsubscribes the Listener with Custom Enum Priority
+     * @param e NOTE: In enums has the first value more priority than the last value
+     */
+    public void unsubscribe(Enum<?> e) { unsubscribe(e.ordinal()); }
+    /**
+     * Unsubscribes the Listener with Custom Integer Priority
+     * @param priority NOTE: 0 is the first called, then greater number get called next.
+     */
     public void unsubscribe(int priority) {
         JVent.getHandler(eventClass).unsubscribe(this, priority);
     }
