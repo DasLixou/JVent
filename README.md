@@ -1,5 +1,5 @@
 # JVent
-A simple Java Library built for making it easy and fast to create Event and Subscribtion Systems. 
+A simple Java and Kotlin Library built for making it easy and fast to create Event and Subscribtion Systems. 
 
 ## Example
 The Event Class:
