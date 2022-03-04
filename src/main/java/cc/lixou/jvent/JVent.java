@@ -1,5 +1,8 @@
 package cc.lixou.jvent;
 
+import kotlin.jvm.JvmClassMappingKt;
+import kotlin.reflect.KClass;
+
 import java.util.HashMap;
 
 public abstract class JVent {
@@ -11,6 +14,10 @@ public abstract class JVent {
             handlers.put(event, new Handler());
         }
         return handlers.get(event);
+    }
+
+    public static Handler getHandler(KClass<? extends JVent> event) {
+        return getHandler(JvmClassMappingKt.getJavaClass(event));
     }
 
 }
