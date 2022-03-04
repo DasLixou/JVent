@@ -25,7 +25,7 @@ public static void main(String[] args) {
     }, true); // true for autosubscribtion
     
     // Calling an Event with Result
-    TestEvent result = JVent.getHandler(TestEvent.class).call(new TestEvent("Initial Value"));
+    TestEvent result = JVent.call(new TestEvent("Initial Value"));
     
     // Working with the Result
     System.out.println(result.getValue()); // Prints: It works! :)
