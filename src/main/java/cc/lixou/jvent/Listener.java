@@ -2,6 +2,7 @@ package cc.lixou.jvent;
 
 import kotlin.jvm.JvmClassMappingKt;
 import kotlin.reflect.KClass;
+import lombok.Getter;
 
 import java.util.function.Consumer;
 
@@ -12,7 +13,7 @@ public class Listener {
     private final Class<? extends JVent> eventClass;
 
     private boolean subscribed = false;
-    private int priority = EventPriority.NORMAL.ordinal();
+    @Getter private int priority = EventPriority.NORMAL.ordinal();
 
     /**
      * @param eventClass The Class of the Event you want to listen
@@ -30,6 +31,19 @@ public class Listener {
     public <U extends JVent> Listener(KClass<U> eventClass, Consumer<U> consumer) {
         this(JvmClassMappingKt.getJavaClass(eventClass), consumer);
     }
+
+    /**
+     * Setting the Priority
+     * @param priority Integer for saying in which order the listeners should get called (0 gets called first)
+     * @return Returns the Listener itself
+     */
+    public Listener setPriority(int priority) { this.priority = priority; return this; }
+    /**
+     * Setting the Priority
+     * @param priority Enum for saying in which order the listeners should get called (first enum element gets called first)
+     * @return Returns the Listener itself
+     */
+    public Listener setPriority(Enum<?> priority) { return setPriority(priority.ordinal()); }
 
     @SuppressWarnings("unchecked")
     public <U extends JVent> U call(U event) {
