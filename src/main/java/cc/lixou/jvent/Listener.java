@@ -12,7 +12,7 @@ public class Listener {
     private final Consumer consumer;
     private final Class<? extends JVent> eventClass;
 
-    private boolean subscribed = false;
+    @Getter private boolean subscribed = false;
     @Getter
     private int priority = EventPriority.NORMAL.ordinal();
     private int oldPriority = -1;
@@ -68,6 +68,7 @@ public class Listener {
      * @param shouldSubscribe When true, subscribes; When false, unsubscribes
      */
     public void subscribe(boolean shouldSubscribe) {
+        this.subscribed = shouldSubscribe;
         if (shouldSubscribe) {
             JVent.getHandler(eventClass).subscribe(this, priority);
         } else {
