@@ -18,16 +18,21 @@ public class EventTest {
         new Listener(ExampleEvent.class, exampleEvent -> {
             value.set("This is before the latest");
             exampleEvent.setCancelled(true);
-        }, true);
+        }).subscribe(true);
+
+        new Listener(ExampleEvent.class, exampleEvent -> {
+            value.set("lastest but reset");
+            exampleEvent.setCancelled(true);
+        }).setPriority(EventPriority.LAST).subscribe(true).setPriority(EventPriority.LOW).resubscribe();
 
         new Listener(ExampleEvent.class, exampleEvent -> {
             value.set(exampleEvent.getMyString());
             exampleEvent.setCancelled(true);
-        }, true, EventPriority.LAST);
+        }).setPriority(EventPriority.LAST).subscribe(true);
 
         ExampleEvent result = JVent.getHandler(ExampleEvent.class).call(new ExampleEvent(wanted));
 
-        assertEquals(value.get(), wanted);
+        assertEquals(wanted, value.get());
         assertTrue(result.isCancelled());
     }
 
