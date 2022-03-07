@@ -67,22 +67,26 @@ public class Listener {
      * Subscribes or unsubscribes the Listener
      * @param shouldSubscribe When true, subscribes; When false, unsubscribes
      */
-    public void subscribe(boolean shouldSubscribe) {
+    public Listener subscribe(boolean shouldSubscribe) {
         this.subscribed = shouldSubscribe;
         if (shouldSubscribe) {
+            oldPriority = priority;
             JVent.getHandler(eventClass).subscribe(this, priority);
         } else {
             JVent.getHandler(eventClass).unsubscribe(this, oldPriority);
-            oldPriority = priority;
         }
+
+        return this;
     }
 
     /**
      *  Resubscribes the Listener for example updating the Event Priority
      */
-    public void resubscribe() {
+    public Listener resubscribe() {
         subscribe(false);
         subscribe(true);
+
+        return this;
     }
 
 }
