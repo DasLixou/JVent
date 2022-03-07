@@ -10,7 +10,9 @@ public class Listener {
     @SuppressWarnings("All")
     private final Consumer consumer;
     private final Class<? extends JVent> eventClass;
-    private int priority = -1;
+
+    private boolean subscribed = false;
+    private int priority = EventPriority.NORMAL.ordinal();
 
     /**
      * @param eventClass The Class of the Event you want to listen
@@ -24,76 +26,9 @@ public class Listener {
     /**
      * @param eventClass The Class of the Event you want to listen
      * @param consumer Consumer for the code that executes when event gets fired
-     * @param autoSubscribe When true, the event will automaticly get subscribed
-     */
-    public <U extends JVent> Listener(Class<U> eventClass, Consumer<U> consumer, boolean autoSubscribe) {
-        this(eventClass, consumer);
-        if(autoSubscribe) {
-            subscribe();
-        }
-    }
-
-    /**
-     * @param eventClass The Class of the Event you want to listen
-     * @param consumer Consumer for the code that executes when event gets fired
-     * @param autoSubscribe When true, the event will automaticly get subscribed
-     * @param priority Integer for saying in which order the listeners should get called (0 gets called first)
-     */
-    public <U extends JVent> Listener(Class<U> eventClass, Consumer<U> consumer, boolean autoSubscribe, int priority) {
-        this(eventClass, consumer);
-        if(autoSubscribe) {
-            subscribe(priority);
-        }
-    }
-
-    /**
-     * @param eventClass The Class of the Event you want to listen
-     * @param consumer Consumer for the code that executes when event gets fired
-     * @param autoSubscribe When true, the event will automaticly get subscribed
-     * @param priority Enum for saying in which order the listeners should get called (first enum element gets called first)
-     */
-    public <U extends JVent> Listener(Class<U> eventClass, Consumer<U> consumer, boolean autoSubscribe, Enum<?> priority) {
-        this(eventClass, consumer);
-        if(autoSubscribe) {
-            subscribe(priority);
-        }
-    }
-
-    /**
-     * @param eventClass The Class of the Event you want to listen
-     * @param consumer Consumer for the code that executes when event gets fired
      */
     public <U extends JVent> Listener(KClass<U> eventClass, Consumer<U> consumer) {
         this(JvmClassMappingKt.getJavaClass(eventClass), consumer);
-    }
-
-    /**
-     * @param eventClass The Class of the Event you want to listen
-     * @param consumer Consumer for the code that executes when event gets fired
-     * @param autoSubscribe When true, the event will automaticly get subscribed
-     */
-    public <U extends JVent> Listener(KClass<U> eventClass, Consumer<U> consumer, boolean autoSubscribe) {
-        this(JvmClassMappingKt.getJavaClass(eventClass), consumer, autoSubscribe);
-    }
-
-    /**
-     * @param eventClass The Class of the Event you want to listen
-     * @param consumer Consumer for the code that executes when event gets fired
-     * @param autoSubscribe When true, the event will automaticly get subscribed
-     * @param priority Integer for saying in which order the listeners should get called (0 gets called first)
-     */
-    public <U extends JVent> Listener(KClass<U> eventClass, Consumer<U> consumer, boolean autoSubscribe, int priority) {
-        this(JvmClassMappingKt.getJavaClass(eventClass), consumer, autoSubscribe, priority);
-    }
-
-    /**
-     * @param eventClass The Class of the Event you want to listen
-     * @param consumer Consumer for the code that executes when event gets fired
-     * @param autoSubscribe When true, the event will automaticly get subscribed
-     * @param priority Enum for saying in which order the listeners should get called (first enum element gets called first)
-     */
-    public <U extends JVent> Listener(KClass<U> eventClass, Consumer<U> consumer, boolean autoSubscribe, Enum<?> priority) {
-        this(JvmClassMappingKt.getJavaClass(eventClass), consumer, autoSubscribe, priority);
     }
 
     @SuppressWarnings("unchecked")
