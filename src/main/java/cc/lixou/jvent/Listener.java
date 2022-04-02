@@ -10,7 +10,7 @@ public class Listener {
 
     @SuppressWarnings("All")
     private final Consumer consumer;
-    private final Class<? extends JVent> eventClass;
+    private final Class<?> eventClass;
 
     @Getter private boolean subscribed = false;
     @Getter
@@ -21,7 +21,7 @@ public class Listener {
      * @param eventClass The Class of the Event you want to listen
      * @param consumer   Consumer for the code that executes when event gets fired
      */
-    public <U extends JVent> Listener(Class<U> eventClass, Consumer<U> consumer) {
+    public <U> Listener(Class<U> eventClass, Consumer<U> consumer) {
         this.consumer = consumer;
         this.eventClass = eventClass;
     }
@@ -30,7 +30,7 @@ public class Listener {
      * @param eventClass The Class of the Event you want to listen
      * @param consumer   Consumer for the code that executes when event gets fired
      */
-    public <U extends JVent> Listener(KClass<U> eventClass, Consumer<U> consumer) {
+    public <U> Listener(KClass<U> eventClass, Consumer<U> consumer) {
         this(JvmClassMappingKt.getJavaClass(eventClass), consumer);
     }
 
@@ -56,7 +56,7 @@ public class Listener {
     }
 
     @SuppressWarnings("unchecked")
-    public <U extends JVent> U call(U event) {
+    public <U> U call(U event) {
         if (event != null) {
             this.consumer.accept(event);
         }
