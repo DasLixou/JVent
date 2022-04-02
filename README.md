@@ -4,7 +4,7 @@ A simple Java and Kotlin Library built for making it easy and fast to create Eve
 ## Example
 The Event Class:
 ```java
-public class TestEvent extends JVent {
+public class TestEvent {
 
     private String value;
 

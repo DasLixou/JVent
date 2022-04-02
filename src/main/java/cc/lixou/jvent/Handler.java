@@ -12,7 +12,7 @@ public class Handler {
         listeners = new TreeMap<>();
     }
 
-    public <U extends JVent> U call(U event) {
+    public <U> U call(U event) {
         AtomicReference<U> result = new AtomicReference<>(event);
         for (int key : listeners.keySet()) {
             listeners.get(key).forEach((listener -> result.set(listener.call(result.get()))));
